@@ -13,6 +13,8 @@ import { FAQ } from './components/FAQ';
 import { Footer } from './components/Footer';
 import { ExitPopup } from './components/ExitPopup';
 import { FloatingCTA } from './components/FloatingCTA';
+import { WhatsAppButton } from './components/WhatsAppButton';
+import { InstagramButton } from './components/InstagramButton';
 
 export default function App() {
   const [showExitPopup, setShowExitPopup] = useState(false);
@@ -89,6 +91,8 @@ export default function App() {
         show={showFloatingCTA} 
         onClick={scrollToOffers} 
       />
+      <WhatsAppButton />
+      <InstagramButton />
     </div>
   );
 }
