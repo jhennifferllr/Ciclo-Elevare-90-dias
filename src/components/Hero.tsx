@@ -23,7 +23,7 @@ export const Hero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="text-5xl md:text-7xl font-black mb-8 leading-[0.9] tracking-tighter uppercase"
+          className="text-4xl sm:text-5xl md:text-7xl font-black mb-8 leading-[0.9] tracking-tighter uppercase"
         >
           Transforme seu corpo <br />
           <span className="text-primary">completamente</span> em 90 dias
