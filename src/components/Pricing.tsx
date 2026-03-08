@@ -1,9 +1,18 @@
-import React from 'react';
-import { motion } from 'motion/react';
-import { CreditCard, ClipboardCheck, ShieldAlert, Star } from 'lucide-react';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
+import { CreditCard, ClipboardCheck, ShieldAlert, Star, Check } from 'lucide-react';
 import { CTAButton } from './CTAButton';
 
 export const Pricing = () => {
+  const [copied, setCopied] = useState(false);
+  const pixCode = "00020126360014BR.GOV.BCB.PIX0114+55629832236665204000053039865406197.005802BR5925Jhenniffer Maria da Silva6009SAO PAULO62140510vhciAsqJzA63046CB1";
+
+  const handleCopyPix = () => {
+    navigator.clipboard.writeText(pixCode);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 3000);
+  };
+
   return (
     <section id="ofertas" className="py-32 px-4 bg-light">
       <div className="max-w-4xl mx-auto">
@@ -14,21 +23,60 @@ export const Pricing = () => {
           </p>
           
           <div className="mb-16">
-            <p className="text-gray-300 line-through text-2xl mb-2">R$ 597,00</p>
+            <p className="text-red-500 line-through text-2xl mb-2">R$ 597,00</p>
             <div className="flex flex-col items-center">
               <span className="text-xs font-bold text-gray-400 uppercase tracking-[0.3em] mb-4">Por apenas</span>
-              <p className="text-7xl md:text-9xl font-black text-dark tracking-tighter leading-none">R$ 197</p>
-              <span className="text-xl font-bold text-gray-300 mt-4 tracking-widest uppercase text-xs">à vista</span>
+              
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                onClick={handleCopyPix}
+                className="relative group cursor-pointer"
+              >
+                <p className="text-7xl md:text-9xl font-black text-dark tracking-tighter leading-none group-hover:text-green-600 transition-colors">
+                  R$ 197
+                </p>
+                <AnimatePresence>
+                  {copied ? (
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      className="absolute -top-8 left-1/2 -translate-x-1/2 bg-green-600 text-white text-[10px] font-bold px-3 py-1 rounded-full flex items-center gap-1 whitespace-nowrap"
+                    >
+                      <Check size={10} /> PIX COPIADO!
+                    </motion.div>
+                  ) : (
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      whileHover={{ opacity: 1 }}
+                      className="absolute -bottom-6 left-1/2 -translate-x-1/2 text-[10px] text-green-600 font-bold uppercase tracking-widest whitespace-nowrap"
+                    >
+                      Clique para copiar o PIX
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.button>
+
+              <span className="text-xl font-bold text-gray-300 mt-8 tracking-widest uppercase text-xs">à vista</span>
             </div>
             <div className="mt-8 flex flex-col items-center">
               <p className="text-gray-400 font-medium italic mb-4">ou R$ 219,90 em até 6x no cartão</p>
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-dark text-white font-bold py-3 px-10 rounded-full shadow-lg hover:bg-gray-800 transition-all duration-300 uppercase tracking-wider text-xs flex items-center gap-2"
+                animate={{ 
+                  boxShadow: ["0px 0px 0px rgba(220, 38, 38, 0)", "0px 0px 20px rgba(220, 38, 38, 0.4)", "0px 0px 0px rgba(220, 38, 38, 0)"]
+                }}
+                transition={{ 
+                  duration: 2,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+                className="bg-red-600 text-white font-bold py-4 px-12 rounded-full shadow-xl hover:bg-red-700 hover:shadow-red-600/50 transition-all duration-300 uppercase tracking-widest text-sm flex items-center gap-3"
                 onClick={() => window.open('https://link.infinitepay.io/informais_informatica/VC1DLTYtSQ-1U088MKHMd-219,90', '_blank')}
               >
-                <CreditCard className="w-4 h-4" />
+                <CreditCard className="w-5 h-5" />
                 Comprar no Cartão
               </motion.button>
               <p className="mt-3 text-[10px] text-gray-400 font-bold uppercase tracking-widest">6 parcelas de R$ 36,65</p>
