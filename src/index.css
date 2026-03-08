@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Montserrat", ui-sans-serif, system-ui, sans-serif;
+  --color-primary: #C2185B;
+  --color-dark: #0F0F0F;
+  --color-light: #F8F9FA;
+  --color-brown: #5D4037;
+  
+  @keyframes pulse-subtle {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+  }
+  --animate-pulse-subtle: pulse-subtle 2s ease-in-out infinite;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-light);
+  color: #d604b6;
+}
